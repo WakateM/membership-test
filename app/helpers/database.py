@@ -76,7 +76,7 @@ def find_plan_by_id(database_path: str, plan_id: str) -> dict | None:
 
 
 def insert_agreement(database_path: str, agreement: dict) -> None:
-    """Store the agreement (start_date as YYYY-MM-DD text); raises sqlite3.IntegrityError when the member already holds the plan."""
+    """Store the agreement, with start_date as YYYY-MM-DD text."""
     statement = (
         "INSERT INTO agreements (id, member_id, plan_id, start_date, due_day)"
         " VALUES (:id, :member_id, :plan_id, :start_date, :due_day)"

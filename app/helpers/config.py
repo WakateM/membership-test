@@ -26,8 +26,7 @@ SCHEMA_STATEMENTS = [
         member_id TEXT NOT NULL REFERENCES members (id),
         plan_id TEXT NOT NULL REFERENCES plans (id),
         start_date TEXT NOT NULL,
-        due_day INTEGER NOT NULL,
-        UNIQUE (member_id, plan_id)
+        due_day INTEGER NOT NULL
     )
     """,
     """

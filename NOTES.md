@@ -49,7 +49,6 @@ The database file is set by the `DATABASE_PATH` environment variable (default `/
 
 ### Part 2 - Plans and the invoice schedule
 
-- A member may hold several agreements, but only one per plan: a second agreement for the same member and plan is 409 AGREEMENT_EXISTS.
 - On GET /agreements/{id}/invoices, an unknown agreement is 404 NOT_FOUND even when the range is also invalid or malformed; missing from or to is still 422 VALIDATION.
 
 ### Part 3 - Reconciling the gateway file

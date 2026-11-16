@@ -1,6 +1,4 @@
-"""Agreement endpoints: a member may hold several agreements, each on a different plan of the member's country."""
-import sqlite3
-
+"""Agreement endpoints: a member may hold several agreements, on any plans of the member's country."""
 from fastapi import FastAPI, HTTPException, Query
 
 from app.helpers.database import (
@@ -35,10 +33,7 @@ def register_agreement_routes(application: FastAPI, database_path: str) -> None:
         agreement_id = generate_base62_id()
         agreement = Agreement(**agreement_creation.model_dump(), id=agreement_id)
         agreement_row = agreement.model_dump(mode="json")  # json mode writes the date as YYYY-MM-DD
-        try:
-            insert_agreement(database_path, agreement_row)
-        except sqlite3.IntegrityError:  # UNIQUE (member_id, plan_id) decides races between writes
-            raise BusinessError(409, "AGREEMENT_EXISTS", "agreement exists")
+        insert_agreement(database_path, agreement_row)
         return agreement
 
     @application.get("/agreements/{agreement_id}")
